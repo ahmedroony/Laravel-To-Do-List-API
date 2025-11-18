@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class TasksController extends Controller
 {
     public function index(){
-        return view('master');
+        $tasks = Task::orderBy('id','DESC')->get();
+        return view('master',[
+            'tasks'=> $tasks,
+        ]);
     }
     public function create(){
         return view('create');
@@ -17,6 +21,6 @@ class TasksController extends Controller
         $task = Task::create([
             'description' => request('description'),
         ]);
-        return dd($task);
+            return Redirect('/');
         }
 }

@@ -17,6 +17,17 @@
         </div>
       </li>
       <li>
+        <span class="done">
+            {{-- @foreach ($todos as $todo )
+            <li>{{$todo->name}}</li>
+            @endforeach --}}
+        </span>
+        <div class="actions">
+          <button>✔</button>
+          <button>🗑</button>
+        </div>
+      </li>
+      <li>
         <span>
         </span>
         <div class="actions">
@@ -26,5 +37,6 @@
       </li>
     </ul>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>

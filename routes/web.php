@@ -1,7 +1,68 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TasksController;
-Route::get('/',[TasksController::class , 'index']);
-Route::get('create',[TasksController::class , 'create']);
-Route::post('/',[TasksController::class,'store'])->name('store');
-Route::patch('/tasks/{id}',[TasksController::class,"update"]);
+Route::get('/', [TasksController::class, 'index'])->name('home');
+Route::get('create', [TasksController::class, 'create']);
+
+Route::get('/edit/{id}',[TasksController::class,'edit'])->name('edit');
+
+Route::post('/', [TasksController::class, 'store'])->name('store');
+Route::patch('/tasks/{id}', [TasksController::class, 'update'])->name('update');
+Route::delete('/delete/{id}',[TasksController::class,'destroy'])->name('tasks.destroy');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Route::get('test', function () {
+    return view('test', [
+        'jobs' => [
+            [
+                'id' => 1,
+                'title' => 'programmer',
+                'salary' => "10000$",
+            ],
+            [
+                'id' => 2,
+                'title' => 'doctor',
+                'salary' => '10000',
+            ],
+        ],
+
+        //can send date from the route
+    ]);
+});
+Route::get('/test/{id}',function($id){
+    dd($id);
+    return view('test');
+});
+

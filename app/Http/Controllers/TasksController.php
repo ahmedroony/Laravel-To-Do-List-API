@@ -11,18 +11,15 @@ class TasksController extends Controller
 {
     public function index()
     {
-        $tasks = Task::orderBy('id', 'DESC')->get();
+        $tasks = Task::orderBy('completed_at', 'DESC')->get();
         return view('master', [
             'tasks' => $tasks,
         ]);
     }
     public function create()
     {
-        return view('create');
+        return view('CeateAndDelete');
     }
-
-
-
     public function store()
     {
         $data = request()->all();
@@ -32,11 +29,21 @@ class TasksController extends Controller
         return Redirect('/');
     }
 
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        $task = Task::where('id', $id)->first();
-        $task->completed_at = now();
+        $task = Task::findOrFail($id);
+        $task->description = $request->description;
         $task->save();
-        return redirect('/');
+        return redirect('/')->with('success', 'Task updated successfully');
+    }
+    public function destroy($id)
+    {
+        Task::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'task deleted successfully');
+    }
+    public function edit($id)
+    {
+        $task = Task::findOrFail($id);
+        return view('edit',compact('task'));
     }
 }

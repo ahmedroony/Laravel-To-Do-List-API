@@ -35,6 +35,15 @@ class TasksController extends Controller
     public function update(Request $request, $id)
     {
         $task = Task::findOrFail($id);
+        if($request->has('toggle_complete')){
+            if($task->completed_at){
+                $task->completed_at = null;
+            }else{
+                $task->completed_at = now();//return currant date/hour
+            }
+            $task->save();
+            return redirect('/')->with('success', 'Task updated successfully');
+        }
         $task->description = $request->description;
         $task->save();
         return redirect('/')->with('success', 'Task updated successfully');

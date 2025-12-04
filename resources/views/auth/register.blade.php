@@ -50,7 +50,6 @@
                       I agree all statements in <a href="#!">Terms of service</a>
                     </label>
                   </div>
-
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                     <button  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg">Register</button>
                   </div>

@@ -10,19 +10,28 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Tasks</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="create">Create</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('show.login') }}">login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('show.register') }}">register</a>
-                </li>
-                <form action="{{route('logout')}}" method="POST">
-                        <a class="nav-link" href="{{ route('show.login') }}">Logout</a>
-                </form>
-
+                @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('show.login') }}">login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('show.register') }}">register</a>
+                    </li>
+                @endguest
+                @auth
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page">Hello "{{ Auth::user()->name }}"</a>
+                    </li>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <li class="nav-item">
+                            <a class="nav-link" href="create">Create</a>
+                        </li>
+                        <button type="submit" class="nav-link" style="border: none; background: none; cursor: pointer;">
+                            Logout
+                        </button>
+                    </form>
+                @endauth
             </ul>
         </div>
     </div>

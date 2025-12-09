@@ -11,7 +11,7 @@ class TasksController extends Controller
 {
     public function index()
     {
-        $tasks = Task::orderBy('completed_at', 'DESC')->get();
+        $tasks = Task::orderBy('completed_at', 'DESC')->paginate(5);
         return view('master', [
             'tasks' => $tasks,
         ]);

@@ -2,7 +2,8 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TasksController;
-
+use App\Mail\mytestmail;
+use Illuminate\Support\Facades\Mail;
 Route::middleware('guest')->controller(AuthController::class)->group(function(){
 Route::get('/register','showregistar')->name('show.register');
 Route::post('/register','register')->name('register');
@@ -18,4 +19,8 @@ Route::post('/','store')->name('store');
 Route::get('/edit/{id}','edit')->name('edit');
 Route::patch('/tasks/{id}', 'update')->name('update');
 Route::delete('/delete/{id}','destroy')->name('tasks.destroy');
+});
+Route::get('/test-mail/{name}',function($name){
+    Mail::to('test@gmail.com')->send(new mytestmail($name));
+    dd("mail sent successfully");
 });

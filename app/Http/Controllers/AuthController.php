@@ -27,7 +27,7 @@ class AuthController extends Controller
             'password' => $validated['password'],
         ]);
         Auth::login($user);
-        return redirect()->route('home');
+        return redirect()->route('login');
     }
     public function login(Request $request){
             $validated = $request->validate([

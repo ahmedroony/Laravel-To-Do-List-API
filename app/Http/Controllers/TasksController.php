@@ -23,7 +23,7 @@ class TasksController extends Controller
     public function store()
     {
         request()->validate([
-            "description" => "required|max:255",
+            'description' => 'required|max:255',
         ]);
         $data = request()->all();
         $task = Task::create([
@@ -34,12 +34,20 @@ class TasksController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate(
+            [
+                'description' => 'required',
+            ],
+            [
+                'description.required' => 'The description field is required.',
+            ],
+        );
         $task = Task::findOrFail($id);
-        if($request->has('toggle_complete')){
-            if($task->completed_at){
+        if ($request->has('toggle_complete')) {
+            if ($task->completed_at) {
                 $task->completed_at = null;
-            }else{
-                $task->completed_at = now();//return currant date/hour
+            } else {
+                $task->completed_at = now(); //return currant date/hour
             }
             $task->save();
             return redirect('/')->with('success', 'Task updated successfully');
@@ -56,6 +64,6 @@ class TasksController extends Controller
     public function edit($id)
     {
         $task = Task::findOrFail($id);
-        return view('edit',compact('task'));
+        return view('edit', compact('task'));
     }
 }
